@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test canvas</title>
+	<style type="text/css">
+		body{
+			margin: 0;
+		}
+
+
+	</style>
+</head>
+<body>
+
+	<canvas id="canvas" >do not support canvas</canvas>
+
+	<script type="text/javascript">
+		//initialize
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		canvas.width = 1000;
+		canvas.height = 1000;
+		document.body.appendChild(canvas);
+
+		var drawTree = function(ctx, sX, sY, length, angle, depth, width){
+			var newLength, newAngle, newDepth, eX, eY, baseX, baseY, topX, topY, subBranches;
+			var rand = Math.random;
+			var maxBranch = 3;
+			var maxAngle = Math.PI/2;
+			var shrink = 0.618;
+
+			//calculation
+			eX = sX+length*Math.cos(angle);
+			eY = sY-length*Math.sin(angle);
+			baseX = 0.5*width*Math.sin(angle);
+			baseY = 0.5*width*Math.cos(angle);
+			topX = shrink*(0.5*width)*Math.sin(angle);
+			topY = shrink*(0.5*width)*Math.cos(angle);
+
+			ctx.beginPath();
+			ctx.lineCap = 'cap';
+			ctx.lineWidth = width;
+			ctx.moveTo(sX-baseX,sY-baseY);		//point a
+
+			//points
+			ctx.lineTo(sX+baseX,sY+baseY);		//point b
+			ctx.lineTo(eX+topX,eY+topY);	//point c
+			ctx.lineTo(eX-topX,eY-topY);	//point d
+			ctx.lineTo(sX-baseX,sY-baseY);		//point a
+
+			if(depth <= 1){
+				ctx.fillStyle = 'rgb(0,'+(((rand()*64)+128)>>0)+',0)';
+			}else{
+				ctx.fillStyle = 'rgb('+(((rand()*64)+64)>>0)+',50,25)';
+			}
+			ctx.fill();
+			// ctx.stroke();
+
+			newDepth = depth -1;
+			if(!newDepth){
+				return;
+			}
+
+			subBranches = (rand()*(maxBranch-1))+1;
+			width*=shrink;
+
+			for(var i=0;i<subBranches;i++){
+				newAngle = angle+rand()*maxAngle-maxAngle*0.5;
+				newLength = length*(0.7+rand()*0.3);
+				drawTree(ctx, eX, eY, newLength, newAngle, newDepth, width);	
+			}
+
+		}
+
+		//ctx, startX, startY, length, angle, depth, branchWidth
+		drawTree(ctx,500,900,120,Math.PI/2,5,30);
+		
+		
+
+
+	</script>
+</body>
+</html>
