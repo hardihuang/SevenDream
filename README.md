@@ -10,3 +10,5 @@ SevenDream for the dreamers
 * Videos
 
 ##Sevendream Community
+* Make friends
+* Work togather
