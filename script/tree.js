@@ -53,7 +53,7 @@ var drawTree = function(ctx, sX, sY, length, angle, depth, width){
 
 
 	ctx.fill();
-	ctx.stroke();
+	// ctx.stroke();
 
 	/*prepare new data for new branches, same variables outside the for loop
 	* different variables for each branches inside the for loop
