@@ -1,14 +1,4 @@
 # SevenDream
-SevenDream for the dreamers
-
-
+Commit Every Day
 ##Sevendream Tree
 ![SevenDream Tree](img/front_thumb_2017-01-01.jpg)
-
-##Sevendream Wiki
-* Articles
-* Videos
-
-##Sevendream Community
-* Make friends
-* Work togather
