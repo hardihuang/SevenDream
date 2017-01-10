@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>七梦网 - 我的大树</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+	
+	<div id="sky"></div>
+	<div id="grass"></div>
+
+	<script src="script/lib/jquery.min.js"></script>
+	<script src="script/lib/bootstrap.js"></script>	
+	<script type="text/javascript">
+		//initialize
+		var canvas = document.createElement("canvas");
+		var ctx = canvas.getContext("2d");
+		canvas.width = 1000 ;
+		canvas.height =1000;
+		document.body.appendChild(canvas);
+
+		ctx.beginPath();
+		ctx.moveTo(500,500);
+		ctx.lineTo(500,100);
+		ctx.lineWidth = 10;
+		ctx.stroke();
+
+	</script>
+
+</body>
+</html>
