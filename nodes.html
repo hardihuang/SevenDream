@@ -36,24 +36,27 @@
 		document.body.appendChild(canvas);
 
 		// config
-		var tri_width=50;
+		var tri_width=80;
 		var tri_height=(tri_width/2)*Math.random();
 		var tri_sX=center('x');
 		var tri_sY=center('y')*0.9;
 		var shrink=0.618;
 		var brc_length=200;
 
-
 		//calculute
 		var tri_tX = tri_sX;
 		var tri_tY = tri_sY-tri_height;
 		var tri_angle = Math.atan(tri_height/(tri_width/2));
+		var brc_angle = tri_angle-Math.PI/2;
 
-		var brc_angle = tri_angle+Math.PI/2;
-		var brc_sX = tri_sX-(tri_width/4);
+		var brc_sX = tri_sX+(tri_width/4);
 		var brc_sY = tri_sY-(tri_height/2);
 		var brc_eX = brc_sX+brc_length*Math.cos(brc_angle);
-		var brc_eY = brc_sY-brc_length*Math.sin(brc_angle);
+		var brc_eY = brc_sY+brc_length*Math.sin(brc_angle);
+
+		var brc2_sX = tri_sX-(tri_width/4);
+		var brc2_eX = brc2_sX-brc_length*Math.cos(brc_angle);
+
 		var brc_baseW = tri_height/Math.sin(tri_angle);
 		var brc_baseTriW= tri_width/4;
 		var brc_baseTriH= tri_height/2;
@@ -65,24 +68,38 @@
 
 		ctx.lineCap = "round";
 		ctx.fillStyle = "rgb(130, 86, 59)";
+		ctx.lineWidth = 1;
 
+		// parent branch
+
+
+		// triangle node
 		ctx.moveTo(tri_tX,tri_tY);
 		ctx.lineTo(tri_sX-(tri_width/2),tri_sY);
 		ctx.lineTo(tri_sX+(tri_width/2),tri_sY);
 		ctx.lineTo(tri_tX,tri_tY);
 		ctx.lineTo(tri_tX,tri_sY);
 
+		// branch 1 - right
 		ctx.moveTo(brc_sX,brc_sY);
 		ctx.lineTo(brc_eX,brc_eY);
 
+		ctx.moveTo(tri_sX+(tri_width/2),tri_sY); //point a
+		ctx.lineTo(tri_tX,tri_tY); //point b
+		ctx.lineTo(brc_eX-brc_topTriW,brc_eY-brc_topTriH); //point c
+		ctx.lineTo(brc_eX+brc_topTriW,brc_eY+brc_topTriH); //point d
+		ctx.lineTo(tri_sX+(tri_width/2),tri_sY); //back to point a
+
+		// branch 2 - left
+		ctx.moveTo(brc2_sX,brc_sY);
+		ctx.lineTo(brc2_eX,brc_eY);
+
 		ctx.moveTo(tri_sX-(tri_width/2),tri_sY); //point a
 		ctx.lineTo(tri_tX,tri_tY); //point b
-		ctx.lineTo(brc_eX+brc_topTriW,brc_eY-brc_topTriH); //point c
-		ctx.lineTo(brc_eX-brc_topTriW,brc_eY+brc_topTriH); //point d
+		ctx.lineTo(brc2_eX+brc_topTriW,brc_eY-brc_topTriH); //point c
+		ctx.lineTo(brc2_eX-brc_topTriW,brc_eY+brc_topTriH); //point d
 		ctx.lineTo(tri_sX-(tri_width/2),tri_sY); //back to point a
 
-
-		ctx.lineWidth = 1;
 		ctx.fill();
 		ctx.stroke();
 
