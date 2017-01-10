@@ -17,30 +17,41 @@
 	<script src="script/lib/jquery.min.js"></script>
 	<script src="script/lib/bootstrap.js"></script>	
 	<script type="text/javascript">
+		//return root location
+		function center(a){
+			if(a=="x"){
+				return document.body.offsetWidth/2;
+			}else if(a=="y"){
+				return document.body.offsetHeight;
+			}else{
+				return;
+			}
+		}
+
 		//initialize
 		var canvas = document.createElement("canvas");
 		var ctx = canvas.getContext("2d");
-		canvas.width = 1000 ;
-		canvas.height =1000;
+		canvas.width = document.body.offsetWidth ;
+		canvas.height =document.body.scrollHeight;
 		document.body.appendChild(canvas);
 
 		// config
 		var width=200;
 		var height=(width/2)*Math.random();
 		// console.log(width+','+height);
-		var startX=300;
-		var startY=500;
+		var startX=center('x');
+		var startY=center('y')*0.9;
 
 		//calculute
-		var tPointX = startX+width/2;
+		var tPointX = startX;
 		var tPointY = startY-height;
 
 
 		ctx.beginPath();
 		ctx.lineCap="round";
 		ctx.moveTo(tPointX,tPointY);
-		ctx.lineTo(startX,startY);
-		ctx.lineTo(startX+width,startY);
+		ctx.lineTo(startX-(width/2),startY);
+		ctx.lineTo(startX+(width/2),startY);
 		ctx.lineTo(tPointX,tPointY);
 		ctx.lineTo(tPointX,startY);
 
