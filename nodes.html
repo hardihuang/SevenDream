@@ -24,9 +24,26 @@
 		canvas.height =1000;
 		document.body.appendChild(canvas);
 
+		// config
+		var width=200;
+		var height=(width/2)*Math.random();
+		// console.log(width+','+height);
+		var startX=300;
+		var startY=500;
+
+		//calculute
+		var tPointX = startX+width/2;
+		var tPointY = startY-height;
+
+
 		ctx.beginPath();
-		ctx.moveTo(500,500);
-		ctx.lineTo(500,100);
+		ctx.lineCap="round";
+		ctx.moveTo(tPointX,tPointY);
+		ctx.lineTo(startX,startY);
+		ctx.lineTo(startX+width,startY);
+		ctx.lineTo(tPointX,tPointY);
+		ctx.lineTo(tPointX,startY);
+
 		ctx.lineWidth = 10;
 		ctx.stroke();
 
